@@ -1,12 +1,16 @@
-/*
-* Equipo:
-* Josue Morales
-* Homero Gonzalez
-* Osmar Hernandez
-* Ricardo Trevizo
-* */
 import java.util.LinkedList;
 
+/**
+ * Clase Main
+ *
+ * Inicia el programa.
+ *
+ * @author Josue Morales
+ * @author Homero Gonzalez
+ * @author Osmar Hernandez
+ * @author Ricardo Trevizo
+ * @version 1.0
+ */
 public class Main {
 
     public static void main(String[] args) {

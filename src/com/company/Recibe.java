@@ -2,16 +2,39 @@ import java.util.Random;
 import java.util.LinkedList;
 
 /**
- * Created by Morales on 18/08/16.
+ * Clase Recibe
+ *
+ * Crea un hilo que procesa cadenas de texto para introducirlas al buffer. Extiende a Thread para crear un hilo.
+ *
+ * @author Josue Morales
+ * @author Homero Gonzalez
+ * @author Osmar Hernandez
+ * @author Ricardo Trevizo
+ * @version 1.0
  */
 public class Recibe extends Thread{
 
-    LinkedList buffer;
+    //Atributos
+    //Buffer donde se obtienen las cadenas de texto.
+    private LinkedList buffer;
 
+    /**
+     * Constructor con 1 parametro
+     * @param buffer buffer donde se obtienen las cadenas de texto
+     */
     public Recibe(LinkedList buffer){
         this.buffer = buffer;
     }
 
+    /**
+     * Método que imprime las cadenas de texto del usuario y su equivalente en morse.
+     * En caso de haber en caso de que el buffer tenga mas de 0 elementos, imprimira
+     * la cadena de texto y su equvalente en morse.
+     * Despues, esperara entre 1 y 30 segundos, para sacar la siguiente cadena traducida,
+     * en caso de haber.
+     * @see Thread
+     */
+    @Override
     public void run() {
         String mensaje;
         while(true){
@@ -30,6 +53,11 @@ public class Recibe extends Thread{
         }
     }
 
+    /**
+     * Método que reemplaza los caracteres alfanumericos a su equivalente en morse.
+     * @param mensaje mensaje del usuario que sera traducido a morse.
+     * @return Cadena de texto traducida a morse en "." y "-".
+     */
     public String toMorse(String mensaje){
         String morse = mensaje.toLowerCase();
         morse = morse.replaceAll("a", ".-");

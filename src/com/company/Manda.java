@@ -4,20 +4,48 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Morales on 18/08/16.
+ * Clase Manda
+ *
+ * Crea un hilo que procesa cadenas de texto para introducirlas al buffer. Extiende a Thread para crear hilo.
+ *
+ * @author Josue Morales
+ * @author Homero Gonzalez
+ * @author Osmar Hernandez
+ * @author Ricardo Trevizo
+ * @version 1.0
  */
 public class Manda extends Thread{
 
-    LinkedList buffer;
-    final String regex = "[abcdefghijklmnopqrstuvwxyz0123456789]+";
-    Pattern pattern;
-    Matcher matcher;
+    //Atributos
+    //Buffer donde se introducen las cadenas de texto.
+    private LinkedList buffer;
+    //Regex para verificar que las cadenas de texto sean validad
+    private final String regex = "[abcdefghijklmnopqrstuvwxyz0123456789]+";
+    //pattern, parte de verificacion
+    private Pattern pattern;
+    //matcher, parte de verificacion
+    private Matcher matcher;
 
+    /**
+     * Constructor con 1 parametro
+     * @param buffer buffer donde se introducen las cadenas de texto
+     */
     public Manda(LinkedList buffer){
         this.buffer = buffer;
         pattern = Pattern.compile(regex);
     }
 
+    /**
+     * Metodo que obtiene las cadenas de texto del usuario y las introduce a el buffer.
+     * En caso de haber 10 elementos en el buffer, le pedira al usuario que espere 3 segundos
+     * hasta que el buffer regrese a 9 elementos o menos.
+     * En caso de que la cadena de texto sea "cantidad", mostrara la cantidad de elementos en
+     * el buffer.
+     * En caso de que la cadena de texto sea "off", terminara el programa.
+     * Si llega a fallar el método sleep, imprira la causa  del error y el programa continuara
+     * @see Thread
+     */
+    @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
         String mensaje;
@@ -56,6 +84,14 @@ public class Manda extends Thread{
         }
     }
 
+    /**
+     * Metodo que verifica que la cadena de texto sea valida
+     * @param mensaje texto del usuario
+     * @return <ul>
+     *          <li>true: la cadena de texto contiene solo caracteres alfanumericos</li>
+     *          <li>false: la cadena de texto tiene simbolos invalidos o está vacia</li>
+     *          </ul>
+     */
     public boolean entradaValida(String mensaje){
         matcher = pattern.matcher(mensaje);
         return mensaje.equals("")?false:matcher.matches();
